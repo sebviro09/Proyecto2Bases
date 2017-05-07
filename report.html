@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<script src="http://code.angularjs.org/1.0.5/angular.js"></script>
+<script src="Scripts/report.js"></script>
+<html lang="en" ng-app="Reportes">
+  <head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="estiloAdmin.css">	
+	<title>Vista de reportes Supermercado Las 3 Marías</title>
+  </head>
+
+  <body ng-controller="reportController">
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Vista de reportes</h1>
+		<h3>Supermercado Las 3 Marías</h3>		
+      </div>
+    </div>
+
+    <div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Listado de productos totales</h2>
+				<p> Mostrar todos los productos de todas las sucursales, el costo de los productos y la existencia en todas las sucursales </p>
+				<button id="btnListaTotal" type="button" class="btn btn-info btn-md" ng-click ="listadoTotal()" onclick="mostrarTotal()">Ver listado &raquo;</button>
+			</div>
+			<div class="col-md-4">
+				<h2>Listado de productos por sucursal</h2>
+				<p> Mostrar ordenado por nombre todos los productos de una sucursal, la descripción, el precio y la existencia </p>
+				<button id="btnListaSucursal" type="button" class="btn btn-warning btn-md" ng-click="cargarSucursales()" onclick="mostrarSucursal();">Ver listado &raquo;</button>
+			</div>
+			<div class="col-md-4">
+				<h2>Listado de gastos</h2>
+				<p> Mostrar gastos en un rango de fechas con detalles</p>
+				<button id="btnListaGastos" type="button" class="btn btn-primary btn-md"  ng-click="cargarSucursales()" onclick="mostrarGastos();">Ver listado &raquo;</button>
+			</div>
+		</div>
+		<br> <hr> <br>
+		<div class="row">
+		<!-- Listado total de productos -->
+			<div class="col-md-10" id="listadoTotal" hidden="hidden">
+				<div class="table-responsive">          
+				  <table class="table">
+					<thead>
+					  <tr>
+						<th>Cantidad</th>
+						<th>Descripción de producto</th>
+						<th>Precio</th>
+					  </tr>
+					</thead>
+					<tbody>
+                        <tr ng-repeat="productoTotal in ListadoTotal">
+                            <td>{{productoTotal.cantidad}}</td>
+                            <td>{{productoTotal.nombre}}</td>
+                            <td>{{productoTotal.precio}}</td>
+                        </tr>
+					</tbody>
+				  </table>
+				  <br> <hr> <br>
+			  </div>				
+			</div>
+			
+		<!-- Listado por sucursal -->	
+			<div class="col-md-10" id="listadoSucursal" hidden="hidden">
+				<label for="select">Seleccione la sucursal:</label>
+				<br>
+                <select ng-model="sucursal.id" ng-options="id as id for id in ListaSucursales2"></select>
+				<hr>			
+				<div class="table-responsive">          
+				  <table class="table">
+					<thead>
+					  <tr>
+						<th>Cantidad</th>
+						<th>Nombre</th>
+						<th>Descripción de producto</th>
+						<th>Precio</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td>78</td>
+						<td>Shampoo Head & Shoulders</td>
+						<td>1000 ml</td>
+						<td>3000</td>
+					  </tr>		  
+					</tbody>
+				  </table>
+				  <br> <hr> <br>
+			  </div>				
+			</div>			
+		
+			<!-- Listado de gastos -->		
+			<div class="col-xs-10 col-sm-8 col-md-8 col-lg-8" id="listadoGastos" hidden=''>
+				<label for="select">Seleccione la sucursal:</label>
+				<br>
+                <select ng-model="sucursal.id" ng-options="id as id for id in ListaSucursales"></select>
+				<hr>
+				<label for="fechaRealCompra">Fecha inicio</label>				
+				<div class="form-group">
+					<form>
+						<input class="form-control" type="date" ng-model="sucursal.fechainicio" name="fechaInicio" id="fechaInicio" min="1990-01-01" max="2017-12-31"><br>
+					</form>
+				</div>
+				<br>	
+				<label for="fechaRegCompra">Fecha final</label>				
+				<div class="form-group">
+					<form>
+						<input class="form-control" type="date" ng-model="sucursal.fechafinal" name="fechaFinal" id="fechaFinal" min="2000-01-01" max="2030-12-31"><br>
+					</form>
+				</div>				
+				<hr>
+				<button id="btnMostrarGastos" type="button" class="btn btn-primary btn-md" ng-click="obtenerListaGastos()" onclick="mostrarListaGastos();">	Consultar gastos </button>
+				<hr>
+				<div class="col-md-12" id="listaGastosFecha" hidden="hidden">
+					<div class="table-responsive">          
+					  <table class="table">
+						<thead>
+						  <tr>
+							<th>Fecha</th>
+							<th>Proveedor</th>
+							<th>Descripción</th>
+							<th>Monto</th>
+						  </tr>
+						</thead>
+						<tbody>
+                            <tr ng-repeat="gasto in ListaGastos">
+                                <td>{{gasto.fecha}}</td>
+                                <td>{{gasto.nombre}}</td>
+                                <td>{{gasto.descripcion}}</td>
+                                <td>{{gasto.monto}}</td>
+                            </tr>
+                       </tbody>
+					  </table>
+					  <br> <hr> <br>
+				  </div>				
+				</div>	
+				
+			</div>
+		</div>	
+		
+		<div class="row">
+			<div class="col-md-4">
+				<button id="btnRegresar" type="button" class="btn btn-danger btn-md" onclick="regresar();"> << Volver</button>
+			</div>
+		</div>	
+      <hr>
+
+      <footer>
+        <p>&copy; 2017 Supermercado Las 3 Marías</p>
+      </footer>
+    </div>
+
+	<script src="Scripts/jquery.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
+  </body>
+</html>

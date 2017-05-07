@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+
+<script src="http://code.angularjs.org/1.0.5/angular.js"></script>
+<script src="Scripts/jquery.js"></script>
+<script src="Scripts/bootstrap.min.js"></script>
+<script src="Scripts/ventas.js"></script>
+
+<html ng-app="Ventas">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="estiloAdmin.css">		    
+	<title>Vista de punto de venta Supermercado Las 3 Marías</title>
+  </head>
+  
+    <body ng-controller="ventasController" ng-init="getSucursales()">
+		<div class="jumbotron">
+			<div class="container">
+			<h1>Vista de punto de venta</h1>
+			<h3>Supermercado Las 3 Marías</h3>		
+			</div>
+		</div>
+	
+		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+		</div>	
+		
+		<div class="col-xs-10 col-sm-6 col-md-4 col-lg-3" id="selectSucursal">
+			<label for="selectSucursal">Seleccione la sucursal donde desea recoger sus productos:</label>
+			<br>
+            <select ng-model="sucursal.id" ng-options="suc as suc for suc in sucursalId" ng-click="fillSucursalFields()"></select>
+			<hr>
+			<label for="select">Seleccione el producto:</label>
+			<br>
+            <select ng-model="producto.nombre" ng-options="pro as pro for pro in productoNombres" ng-click="fillProductoFields()"></select>
+			<hr>
+			<label for="cantProductos">Cantidad:</label>
+				<input type="number" ng-model="compra.cantidad" class="form-control" id="cantidad" min="1">
+				<br>
+				<hr>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">	
+				<a class="btn btn-md btn-info btn-block" ng-click="agregarAlCarrito()" type="submit">Agregar al carrito >></a>
+				<br>
+			</div>
+			<br><hr><br>
+			<label for="numTarjeta">&nbsp;&nbsp;&nbsp&nbsp;&nbspNúmero de tarjeta</label>
+			<br>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-6">						
+					<input class="form-control" id="ced2" type="number" min="0000" max="9999" maxlength="4" placeholder="####">
+					<input class="form-control" id="ced3" type="number" min="0000" max="9999" maxlength="4" placeholder="####">
+					<input class="form-control" id="ced2" type="number" min="0000" max="9999" maxlength="4" placeholder="####">
+					<input class="form-control" id="ced3" type="number" min="0000" max="9999" maxlength="4" placeholder="####">
+			</div>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-4">			
+			<label for="formaPago">&nbsp;&nbsp;&nbsp&nbsp;&nbspCVV</label>
+			<br>									
+					<input class="form-control" id="ced2" type="number" min="000" max="999" maxlength="3" placeholder="###">
+			</div>
+			<label for="formaPago">&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbspVence</label>
+			<br>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-4">			
+					<input class="form-control" id="ced2" type="number" min="01" max="12" maxlength="2" placeholder="##">
+					<input class="form-control" id="ced2" type="number" min="00" max="99" maxlength="2" placeholder="##">	
+			</div>			
+			<br><hr><br>			
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<hr>
+				<a class="btn btn-md btn-success btn-block" ng-click="realizarCompra()" type="submit">Realizar compra</a>
+				<br><hr>
+			</div>
+			<br>
+		</div>
+
+		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+		</div>			
+		
+		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+		<hr>
+		  <div class="table-responsive">          
+		  <table class="table">
+			<thead>
+			  <tr>
+				<th>Cantidad</th>
+				<th>Descripción</th>
+				<th>Precio Unitario</th>
+				<th>Precio Total</th>
+				<th> Botones </th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+                  <td>{{produCarrito.cantidad}}</td>
+                  <td>{{produCarrito.nombre}}</td>
+                  <td>{{produCarrito.precioCompra}}</td>
+                  <td>{{produCarrito.precioTotal}}</td>
+				  <td> <a class="btn btn-md btn-success btn-block" ng-click="realizarCompra()" type="submit">Realizar compra</a> </td>
+			  </tr>
+			</tbody>
+		  </table>
+		  <br> <hr> <br>
+		  </div>		
+		
+			<div class="form-group">
+				<label for="subTotal">Subtotal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</label>
+				<input type="number" id="subtotal"  ng-model="compra.subtotal" disabled>
+				<hr>
+				<label for="subTotal">Impuesto&nbsp;(+)&nbsp;&nbsp</label>
+				<input type="number" id="impuesto" ng-model="compra.impuesto" disabled>
+				<hr>	
+				<label for="subTotal">Descuento (-)</label>
+				<input type="number" id="descuento" ng-model="compra.descuento"  disabled>
+				<hr>
+			</div>
+				<label for="cantProductos">Total a pagar:</label>
+				<input type="number" class="form-control" ng-model="compra.total"id="total" disabled>
+				<br>
+		</div>
+
+		
+	</body>
+</html>

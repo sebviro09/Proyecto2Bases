@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl">
+
+<ul>
+  <li <li ng-repeat="x in myData">>
+    {{ x.Username }}
+  </li>
+  <li>
+    hola
+  </li>
+</ul>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+  $http.jsonp(
+    "http://las3m.somee.com/api/LogIn",
+    {
+      params: {
+        username: "albcool",
+        password: "alberto12345",
+        callback: 'JSON_CALLBACK'
+      },
+    }
+  )
+  .success(function (data, status, headers, config) {
+      $scope.myData = data;
+      console.log("myData: " + $scope.myData);
+  })
+  .error(function (data, status, headers, config) {
+      //this always gets called
+      console.log(status);
+  });
+});
+
+</script>
+
+</body>
+</html>

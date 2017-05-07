@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<script src="http://code.angularjs.org/1.0.5/angular.js"></script>
+<script src="registro.js"></script>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="estiloAdmin.css">		    
+		<title>Registro de cliente Supermercado Las 3 Marías</title>
+	</head>
+
+	<body ng-app = "Registro" ng-controller = "registroController" >
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Registro de cliente</h1>
+				<h3>Supermercado Las 3 Marías</h3>		
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-8 col-sm-3 col-md-3 col-lg-3">
+					<h3><span class="label label-primary">Nombre de usuario*</span></h3>
+				</div>	
+				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+					<br>
+					<input class="form-control" ng-model="User.usuario" id="usuario" type="text" required>
+				</div>			
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-8 col-sm-3 col-md-3 col-lg-2">
+					<h3><span class="label label-primary">Contraseña*</span></h3>
+				</div>	
+				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+					<br>
+					<input class="form-control" ng-model="User.contrasena1" id="pass1" type="password" placeholder="Escriba su contraseña" required>
+				</div>			
+				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+					<br>
+					<input class="form-control" ng-model="User.contrasena2" id="pass2" type="password" placeholder="Repita su contraseña" required>
+				</div>
+					<span id="confirmMessage" class="confirmMessage"></span>
+			</div>
+			<br> <br> <hr> <br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+					<h3><span class="label label-primary">Número de cédula</span></h3>
+					<br>
+				</div>
+				<br>
+				<div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
+					<input class="form-control" ng-model="User.ced1" id="ced1" type="number" min="1" max="9" maxlength="1" placeholder="#">
+				</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+					<input class="form-control" ng-model="User.ced2" id="ced2" type="number" min="0001" max="9999" maxlength="4" placeholder="####">
+				</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+					<input class="form-control" ng-model="User.ced3" id="ced3" type="number" min="0001" max="9999" maxlength="4" placeholder="####">
+				</div>
+			</div>
+			<br> <br>
+			<div class="row">
+				<div class="col-xs-8 col-sm-2 col-md-2 col-lg-1">		
+					<h3><span class="label label-primary">Nombre*</span></h3>
+				</div>
+				<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
+					<br>
+					<input class="form-control" ng-model="User.nombre" id="nombre" type="text" required>
+				</div>
+				<div class="col-xs-8 col-sm-3 col-md-2 col-lg-2">		
+					<h3><span class="label label-primary">Primer Apellido*</span></h3>
+				</div>
+				<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
+					<br>
+					<input class="form-control" ng-model="User.apellido1" id="apellido1" type="text" required>
+				</div>
+				<div class="col-xs-8 col-sm-5 col-md-2 col-lg-2">		
+					<h3><span class="label label-primary">Segundo Apellido</span></h3>
+				</div>
+				<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
+					<br>
+					<input class="form-control" ng-model="User.apellido2" id="apeliido2" type="text">
+				</div>
+			</div>
+			<br> <br>
+			<div class="row">
+				<div class="col-xs-8 col-sm-5 col-md-3 col-lg-3">	
+					<h3><span class="label label-primary">Fecha de nacimiento*</span></h3>
+				</div> 
+				<div class="col-xs-7 col-sm-4 col-md-3 col-lg-2">				
+					<div class="form-group">
+					<form>
+						<br>
+						<input class="form-control" ng-model="User.fecha" type="date" name="fechanac" id="fechanac" min="1900-01-01" max="2016-12-31"><br>
+					</form>
+					</div>
+				</div>
+			</div>
+			<br> <br>
+			<div class="row">
+				<div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">				
+					<h3><span class="label label-primary">Sexo*</span></h3>
+				</div>
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<div class="radio">
+						<label><input type="radio" ng-model="User.genero" name="sexo" id="hombre" value="Masculino" checked>Masculino</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" ng-model="User.genero" name="sexo" id="mujer" value="Femenino">Femenino</label>
+					</div>
+				</div>			
+			</div> 
+			<br>  
+			<h4> * Los campos son obligatorios </h4>
+			<hr> <br>
+			<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">	
+				<a class="btn btn-lg btn-danger btn-block" href="login.html"><< Regresar</a>
+			</div>
+			<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">	
+				<a class="btn btn-lg btn-success btn-block" type="submit" ng-click="click()">Enviar >></a>
+			</div>
+		</div>
+	<br> <hr> <br>
+	
+	<div class="container">
+		<footer>
+			<p>&copy; 2017 Supermercado Las 3 Marías</p>
+		</footer>
+    </div>
+
+	<script src="Scripts/jquery.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
+	<script src="registro.js"></script>
+  
+	</body>
+
+</html>
