@@ -1,1 +1,3 @@
-document.getElementById("loginContainer").hidden = "hidden";
+function hola(){
+	document.getElementById("loginContainer").hidden = "hidden";
+}

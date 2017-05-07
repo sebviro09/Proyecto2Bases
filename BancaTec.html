@@ -12,6 +12,8 @@
 </head>
 
 <body>
+
+	<!-- CONTAINER DE LOGIN -->
     <div class="container" id="loginContainer">
 		<form class="form-signin">
 			<h1 class="form-signin-heading">SUPERMERCADO &nbsp LAS 3 MARÍAS</h1>
@@ -20,12 +22,60 @@
 			<input type="text" id="inputUser" class="form-control" placeholder="Usuario" autofocus required>
 			<label for="inputPassword" class="sr-only">Contraseña</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-			<button class="btn btn-lg btn-success btn-block" type="submit">Ingresar al sistema</button>
+			<button class="btn btn-lg btn-success btn-block" type="submit" onclick="hola()">Ingresar al sistema</button>
 			<hr>
 			<p> &nbsp Para realizar sus compras por primera vez: </p>
 			<a class="btn btn-lg btn-info btn-block">Regístrese aquí</a>
 		</form>
     </div>
+
+    <!-- CONTAINER DE VISTA ADMINISTRACIÓN -->
+
+    <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Vista administración</h1>
+		<h3>Supermercado Las 3 Marías</h3>		
+      </div>
+    </div>
+
+	<!-- Contenido de la página -->
+    <div class="container">
+		<!-- Fila para ingresar, modificar y eliminar categorías -->
+		<div class="row">
+			<!-- Sección de radio buttons para selección de categoría -->
+			<div class="col-xs-7 col-sm-3 col-md-3 col-lg-3">
+				<div class="radio">
+					<label><input type="radio" value="rol" name="opcRadio" id="optRoles" ng-click="getRoles()" onclick="cancelar()" checked>Roles</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" value="sucursal" name="opcRadio" id="optSucursales" ng-click="getSucursales()" onclick="cancelar()">Sucursales</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" value="trabajador" name="opcRadio" id="optTrabajadores" ng-click ="getSucursalesRolesyTrabajadores()"onclick="cancelar()">Trabajadores</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" value="proveedor" name="opcRadio" id="optProveedores" ng-click="getProveedores()" onclick="cancelar()">Proveedores</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio"  value="producto" name="opcRadio" id="optProductos" ng-click="getProductos()" onclick="cancelar()">Productos</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" value="compra" name="opcRadio" id="optCompras" onclick="cancelar()">Compras</label>
+				</div>
+			</div>
+			<!-- Botones para seleccionar acción a realizar seleccionando la categoría
+				 Al presionarse botón muestra formularios de ingreso, modificar o eliminar	-->
+			<div class="col-xs-3 col-sm-2 col-md-3 col-lg-3">
+				<button id="btnIngresar" type="button" class="btn btn-primary btn-md" onclick="ingresar()">Ingresar</button>
+				<hr>
+				<button id="btnModificar" type="button" class="btn btn-primary btn-md" onclick="modificar()">Modificar</button>
+				<hr>
+				<button id="btnEliminar" type="button" class="btn btn-primary btn-md" onclick="eliminar()">Eliminar</button>
+			</div>
+
+
+    <!-- CONTAINER DE PIE DE PÁGINA -->
 	<br> <hr> <br>
 	<div class="container" id="footerContainer">
 		<div class="col-md-4 col-xs-10">
