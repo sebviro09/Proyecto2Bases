@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <script src="http://code.angularjs.org/1.0.5/angular.js"></script>
-<script src="Scripts/login.js"></script>
 
 <head>
 	<meta charset="UTF-8">
@@ -9,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="Scripts/bootstrap.min.css">
 	<link rel="stylesheet" href="Scripts/estiloLogin.css">
+	<script src="Scripts/BancaTec.js"></script>
 </head>
 
 <body>
@@ -46,19 +46,16 @@
 			<!-- Sección de radio buttons para selección de categoría -->
 			<div class="col-xs-7 col-sm-3 col-md-3 col-lg-3">
 				<div class="radio">
-					<label><input type="radio" value="rol" name="opcRadio" id="optRoles" ng-click="getRoles()" onclick="cancelar()" checked>Roles</label>
+					<label><input type="radio" value="rol" name="opcRadio" id="optRoles" onclick="cancelar()" checked>Roles</label>
 				</div>
 				<div class="radio">
-					<label><input type="radio" value="sucursal" name="opcRadio" id="optSucursales" ng-click="getSucursales()" onclick="cancelar()">Sucursales</label>
+					<label><input type="radio" value="trabajador" name="opcRadio" id="optClientes" onclick="cancelar()">Clientes</label>
 				</div>
 				<div class="radio">
-					<label><input type="radio" value="trabajador" name="opcRadio" id="optTrabajadores" ng-click ="getSucursalesRolesyTrabajadores()"onclick="cancelar()">Trabajadores</label>
+					<label><input type="radio" value="proveedor" name="opcRadio" id="optProveedores" onclick="cancelar()">Proveedores</label>
 				</div>
 				<div class="radio">
-					<label><input type="radio" value="proveedor" name="opcRadio" id="optProveedores" ng-click="getProveedores()" onclick="cancelar()">Proveedores</label>
-				</div>
-				<div class="radio">
-					<label><input type="radio"  value="producto" name="opcRadio" id="optProductos" ng-click="getProductos()" onclick="cancelar()">Productos</label>
+					<label><input type="radio"  value="producto" name="opcRadio" id="optProductos" onclick="cancelar()">Productos</label>
 				</div>
 				<div class="radio">
 					<label><input type="radio" value="compra" name="opcRadio" id="optCompras" onclick="cancelar()">Compras</label>
@@ -73,6 +70,653 @@
 				<hr>
 				<button id="btnEliminar" type="button" class="btn btn-primary btn-md" onclick="eliminar()">Eliminar</button>
 			</div>
+
+			<!-- FORMULARIOS -->
+			<!-- ROLES -->
+			<!-- Ingresar nuevo rol -->
+            <div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="ingresarRol" hidden=''>
+                <div class="form-group">
+                    <label for="nombreNuevoRol">Nombre:</label>
+                    <input type="text" class="form-control" id="nombreNuevoRol">
+                    <br>
+                    <label for="descripcionNuevoRol">Descripción:</label>
+                    <textarea class="form-control" rows="2" id="descripcionNuevoRol"></textarea>
+                </div>
+                <hr>
+                <!-- Botones para guardar o descartar los cambios -->
+                <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                    <a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+                </div>
+                <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                    <a class="btn btn-md btn-success btn-block">Guardar</a>
+                </div>
+                <hr>
+            </div>
+			<!-- Modificar rol -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="modificarRol" hidden=''>
+                
+				<label for="selectRol">Seleccione el rol a modificar:</label>
+				<br>
+				<!-- Campo que carga los roles existentes y los despliega para seleccionar el rol a modificar -->
+                <select>
+                </select>
+				<hr>
+				<!-- Campo para añadir el nuevo nombre y descripción -->
+				<div class="form-group">
+					<label for="nombreRolModif">Nombre:</label>
+					<input type="text" class="form-control" id="nombreRolModif">
+					<br>
+					<label for="descripcionRolModif">Descripción:</label>
+					<textarea class="form-control" rows="2" id="descripcionRolModif"></textarea>
+				</div>
+				<hr>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit">Guardar</a>
+				</div>				
+			</div>
+			<!-- Eliminar rol -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="eliminarRol" hidden=''>
+				<label for="selectRol">Seleccione el rol a eliminar:</label>
+					<br>
+                <select></select>
+                    <hr>
+                    <form action="">
+                        <input type="checkbox" name="confirm" value="confirmar">Confirmar eliminación<br>
+                    </form>
+                    <hr>
+                    <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                        <a class="btn btn-md btn-danger btn-block">Eliminar</a>
+                    </div>
+                    <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                        <a class="btn btn-md btn-success btn-block" type="submit" onClick="cancelar();">Cancelar</a>
+                    </div>
+			</div>
+
+			<!-- CLIENTES -->
+			<!-- Ingresar nuevo cliente -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="ingresarCliente" hidden=''>
+				<div class="form-group">
+                    <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+						<div class="radio">
+							<label><input type="radio" value="rol" name="opcRadio" id="optRoles" onclick="cancelar()" checked>Cliente Físico</label>
+						</div>
+					</div>
+					<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+						<div class="radio">
+							<label><input type="radio" value="trabajador" name="opcRadio" id="optClientes" onclick="cancelar()">Cliente jurídico</label>
+						</div>
+					</div>				
+					<label for="nombreNuevoTrab" >Nombre</label>
+					<input type="text" ng-model="trabajador.nombre" class="form-control" id="nombreNuevoTrab">
+					<br>
+					<label for="1ApNuevoTrab" >Primer Apellido</label>
+					<input type="text" ng-model= "trabajador.apellido1" class="form-control" id="1ApNuevoTrab">
+					<br>
+					<label for="2ApNuevoTrab">Segundo Apellido</label>
+					<input type="text"  ng-model= "trabajador.apellido2" class="form-control" id="2ApNuevoTrab">
+				<br>
+				</div>				
+				<label for="CedulaNuevoTrab">Número de cédula</label>				
+					<input class="form-control" ng-model="trabajador.ced1" id="ced1" type="number" min="1" max="9" maxlength="1" placeholder="#">
+					<input class="form-control" ng-model="trabajador.ced2" id="ced2" type="number" min="0001" max="9999" maxlength="4" placeholder="####">
+					<input class="form-control" ng-model="trabajador.ced3" id="ced3" type="number" min="0001" max="9999" maxlength="4" placeholder="####">	
+				<br>
+				<label for="fechaNacNuevoTrab">Sexo</label>		
+					<div class="radio">
+						<label><input type="radio" ng-model="trabajador.sexo" name="sexo" id="hombre" value="Masculino" checked>Masculino</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" ng-model="trabajador.sexo" name="sexo" id="mujer" value="Femenino">Femenino</label>
+					</div>
+				<br>
+				<div class="form-group">
+					<label for="fechaNacNuevoTrab">Fecha de nacimiento</label>				
+					<div class="form-group">
+						<form>
+							<input class="form-control" ng-model="trabajador.fechaNac" type="date" name="fechaNacNuevoTrab" id="fechaNacNuevoTrab" min="1900-01-01" max="2016-12-31"><br>
+						</form>
+					</div>
+					<label for="fechaIngNuevoTrab">Fecha de ingreso</label>				
+					<div class="form-group">
+						<form>
+							<input class="form-control" ng-model="trabajador.fechaIng" type="date" name="fechaIngNuevoTrab" id="fechaIngNuevoTrab" min="1900-01-01" max="2017-12-31"><br>
+						</form>
+					</div>						
+				<label for="selectSucursal">Seleccione la sucursal:</label>
+					<br>
+                    <select ng-model="sucursalModif.id" ng-options="suc as suc for suc in listSucursalId" ng-click="fieldSucursalFields()"></select>
+					<hr>
+                <label for="selectRol">Seleccione el rol:</label>
+                    <br>
+                    <select ng-model="rolModif.id" ng-options="rol as rol for rol in roles" ng-click="fillFields()"></select>
+                    <hr>
+					<label for="salarioNuevoTrab" >Salario por hora</label>
+					<input type="number" class="form-control" ng-model="trabajador.salario" id="salarioNuevoTrab">
+					<br>				
+				</div>
+				<hr>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit" ng-click="guardarTrabajador()">Guardar</a>
+				</div>
+				<hr>	
+			</div>
+			<!-- Modificar trabajador -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="modificarTrabajador" hidden=''>
+				<label for="selectTrab">Seleccione el trabajador a modificar:</label>
+				<br>
+				<select ng-model="trabajadorModif.id" ng-options="trab as trab for trab in trabajadorListIds" ng-click="fillTrabajadorFields()">
+				</select>
+				<hr>
+				<div class="form-group">
+					<label for="nombreTrabModif">Nombre</label>
+					<input type="text" ng-model="trabajadorModif.nombre" class="form-control" id="nombreTrabModif">
+					<br>
+					<label for="1ApTrabModif">Primer Apellido</label>
+					<input type="text" ng-model="trabajadorModif.apellido1" class="form-control" id="1ApTrabModif">
+					<br>
+					<label for="2ApTrabModif">Segundo Apellido</label>
+					<input type="text" ng-model="trabajadorModif.apellido2" class="form-control" id="2ApTrabModif">
+					<br>
+				<label for="selectProv">Seleccione el rol:</label>
+					<br>
+                    <select ng-model="rolModif.id" ng-options="rol as rol for rol in roles" ng-click="fillFields()"></select>
+					<hr>
+				<label for="selectSucursal">Seleccione la sucursal:</label>
+				<br>
+                    <select ng-model="sucursalModif.id" ng-options="suc as suc for suc in listSucursalId" ng-click="fieldSucursalFields()"></select>
+
+				<hr>
+					<label for="salarioTrabModif">Salario por hora</label>
+					<input type="number" ng-model="trabajadorModif.salario" class="form-control" id="salarioTrabModif">
+					<br>				
+				</div>
+				<hr>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit" ng-click="updateTrabajador()">Guardar</a>
+				</div>				
+			</div>
+			<!-- Eliminar trabajador -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="eliminarTrabajador" hidden=''>
+				<label for="selectTrab">Seleccione el trabajador a eliminar:</label>
+					<br>
+                <select ng-model="trabajadorModif.id" ng-options="trab as trab for trab in trabajadorListIds" ng-click="fillTrabajadorFields()"></select>
+                    <hr>
+                    <form action="">
+                        <input type="checkbox" ng-model="trabajadorModif.confirmarEliminacion" name="confirm" value="confirmar">Confirmar eliminación<br>
+                    </form>
+                    <hr>
+                    <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                        <a class="btn btn-md btn-danger btn-block" ng-click="eliminarTrabajador()">Eliminar</a>
+                    </div>
+                    <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                        <a class="btn btn-md btn-success btn-block" type="submit" onClick="cancelar();">Cancelar</a>
+                    </div>
+			</div>
+			
+			<!-- PROVEEDORES -->
+			<!-- Ingresar nuevo proveedor -->
+			<div class="col-xs-10 col-sm-6 col-md-6 col-lg-4" id="ingresarProveedor" hidden=''>
+				<div class="form-group">
+					<label for="nombreNuevoProv">Nombre</label>
+					<input type="text" class="form-control" ng-model="proveedor.nombre" id="nombreNuevoProveedor">
+					<br>
+
+                    <label for="apellidoNuevoProv">Primer Apellido</label>
+                    <input type="text" ng-model ="proveedor.apellido1" class="form-control" id="apellidoNuevoProv">
+                    <br>
+
+                    <label for="apellido2NuevoProv">Segundo Apellido</label>
+                    <input type="text" ng-model="proveedor.apellido2" class="form-control" id="apellido2NuevoProv">
+                    <br>
+
+					<label for="cedulaNuevoProv">Cédula</label>
+					<br>
+					<!-- Formulario para ingresar cédula física -->
+						<div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">
+							<input class="form-control" ng-model ="proveedor.ced1" id="ced1" type="number" min="1" max="9" maxlength="1" placeholder="#">
+						</div>
+						<div class="col-xs-8 col-sm-4 col-md-4 col-lg-4">
+							<input class="form-control"  ng-model ="proveedor.ced2" id="ced2" type="number" min="0001" max="9999" maxlength="4" placeholder="####">
+						</div>
+						<div class="col-xs-8 col-sm-4 col-md-4 col-lg-4">
+							<input class="form-control" ng-model ="proveedor.ced3" id="ced3" type="number" min="0001" max="9999" maxlength="4" placeholder="####">
+							<br>
+						</div>
+					<br>		
+					<br> <hr> <br>
+					<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+						<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+					</div>
+					<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+						<a class="btn btn-md btn-success btn-block" type="submit" ng-click = "guardarProveedor()">Guardar</a>
+					</div>					
+				</div>
+			</div>
+			<!-- Modificar proveedor -->
+			<div class="col-xs-10 col-sm-6 col-md-6 col-lg-4" id="modificarProveedor" hidden=''>
+				<label for="selectProv">Seleccione el proveedor a modificar:</label>
+					<br>
+                    <select ng-model="provModif.ced" ng-options="prov as prov for prov in provListCed" ng-click="fillProveedorFields()"></select>
+					<hr>			
+				<div class="form-group">
+					<label for="nombreProvModif">Nombre</label>
+					<input type="text" ng-model ="provModif.nombre"class="form-control" id="nombreProvModif">
+                    <br>
+                     <label for="apellidoProvModif">Primer apellido</label>
+                        <input type="text" ng-model="provModif.apellido1" class="form-control" id="apellidoProvModif">
+						<br>
+                    <label for="apellido2ProvModif">Segundo apellido</label>
+                    <input type="text" ng-model="provModif.apellido2" class="form-control" id="apellido2ProvModif">
+                        <br> <hr> <br>
+                        <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                            <a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+                        </div>
+                        <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                            <a class="btn btn-md btn-success btn-block" type="submit" ng-click = "updateProveedor()">Guardar</a>
+                        </div>
+                    </div>
+			</div>			
+			<!-- Eliminar proveedor -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="eliminarProveedor" hidden=''>
+				<label for="selectProv">Seleccione el proveedor a eliminar:</label>
+				<br>
+                <select ng-model="provModif.ced" ng-options="prov as prov for prov in provListCed" ng-click="fillProveedorFields()"></select>
+				<hr>
+				<form action="">
+					<input type="checkbox" ng-model ="provModif.confirmarEliminacion" name="confirm" value="confirmar">Confirmar eliminación<br>
+				</form>
+				<hr>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" ng-click="eliminarProveedor()">Eliminar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit" onClick="cancelar();">Cancelar</a>
+				</div>				
+			</div>
+
+			<!-- PRODUCTOS -->
+			<!-- Ingresar nuevo producto -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="ingresarProducto" hidden='hidden'>
+					<label for="nombreNuevoProd">Nombre</label>
+					<input type="text" ng-model="producto.nombre" class="form-control" id="nombreNuevoProd">
+					<br>
+					<label for="descripcionNuevoProd">Descripción</label>
+					<textarea class="form-control" ng-model="producto.descripcion" rows="2" id="descripcionNuevoProd"></textarea>	
+					<br>
+					<label for="precioCompraNuevoProd">Precio de compra</label>
+					<input type="number" ng-model="producto.precioCompra" class="form-control" id="precioCompraNuevoProd">
+					<br>
+					<div class="col-xs-5 col-sm-7 col-md-7 col-lg-7">
+						<label for="impuesto">Impuesto</label>
+						<div class="radio">
+							<label><input type="radio" ng-model="producto.impuesto"name="impRadio" value = "si" id="optImpSi">SÍ</label>
+						</div>
+						<div class="radio">
+							<label><input type="radio" name="impRadio" ng-model=producto.impuesto value = "no" id="optImpNo">NO</label>
+						</div>
+					</div>					
+				<br> <hr> <br>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit" href="login.html">Guardar</a>
+				</div>
+				<hr>	
+			</div>			
+			<!-- Modificar producto -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="modificarProducto" hidden='hidden'>			
+				<label for="select">Seleccione el producto a modificar:</label>
+				<br>
+				<select>
+					<option value="producto1">----------------------------------</option>
+					</select>
+					<hr>				
+				<label for="nombreProdModif">Nombre</label>
+				<input type="text" ng-model="" class="form-control" id="nombreProdModif">
+				<br>
+				<label for="descripcionNuevoProd">Descripción</label>
+				<textarea class="form-control" ng-model="" rows="2" id="descripcionProdModif"></textarea>	
+				<br>
+				<label for="precioCompraProdModif">Precio de compra</label>
+				<input type="number" ng-model="" class="form-control" id="precioProdModif">
+				<br>
+				<div class="col-xs-5 col-sm-7 col-md-7 col-lg-7">
+					<label for="impuesto">Impuesto</label>
+					<div class="radio">
+						<label><input type="radio" ng-model="" name="impRadio" value = "si" id="optImpSi">SÍ</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="impRadio" value = "no" id="optImpNo">NO</label>
+						<br>
+					</div>
+				</div>					
+				<br> <hr> <br>
+				<div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()"> << Cancelar</a>
+					<hr>
+				</div>					
+				<div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" onclick="">Guardar</a>
+					<hr>
+				</div>
+				<hr>
+				<div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-info btn-block" onclick="modifPorSucursal()">Sucursal</a>
+				</div>
+				<div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-primary btn-block" onclick="modifProv()">Proveedor</a>
+				</div>
+				<br><hr><hr><br>				
+			</div>
+			<!-- Por sucursal -->		
+			<div class="col-xs-10 col-sm-5 col-md-5 col-lg-3" id="modifProdSucursal" hidden='hidden'>
+				<label for="select">Seleccione la sucursal del producto:</label>
+				<br>
+				<select>
+					<option value="sucursal1">----------------------------------</option>
+				</select>
+				<hr>
+				<label for="cantidad">Cantidad</label>
+				<input type="number" ng-model="" class="form-control" id="cantProdModif">
+				<br>
+				<label for="precioCompraProdModif">Precio de venta</label>
+				<input type="number" ng-model="" class="form-control" id="precioVentaProdModif">
+				<br>
+				<div class="col-xs-8 col-sm-8 col-md-4 col-lg-5" id="porcentaje">
+					<label for="porcDescuento">Descuento</label>
+					<input class="form-control" id="porcDescuento" type="number" min="1" max="99" maxlength="2" placeholder="%">
+				</div>
+				<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">	
+					<label> . </label>
+					<hr>	
+				</div>
+				<br> <hr>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="regresar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit">Guardar</a>
+				</div>
+				<hr>	
+			</div>	
+
+			<!-- Por proveedor -->
+			<div class="col-xs-10 col-sm-5 col-md-5 col-lg-3" id="modifProv" hidden='hidden'>			
+				<label for="select">Seleccione el proveedor:</label>
+				<br>
+				<select>
+					<option value="prov1">----------------------------------</option>
+				</select>
+				<hr>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-7">	
+					<a class="btn btn-md btn-success btn-block">Agregar</a>
+					<br>
+				</div>
+				<br> <hr> <br>
+
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+					<a class="btn btn-md btn-danger btn-block" onclick="regresar()">Regresar</a>
+				</div>
+			</div>		
+
+				<!-- Eliminar producto -->
+				<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="eliminarProducto" hidden=''>
+					<label for="select">Seleccione el producto a eliminar:</label>
+						<br>
+						<select>
+							<option value="rol1">----------------------------------</option>
+							<option value="rol2">Producto número 1</option>
+							<option value="roln">Producto número N</option>
+						</select>
+						<hr>					
+						<form action="">
+							<input type="checkbox" name="confirm" value="confirmar">Confirmar eliminación<br>
+						</form>
+						<hr>
+						<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+							<a class="btn btn-md btn-danger btn-block">Eliminar</a>
+						</div>
+						<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+							<a class="btn btn-md btn-success btn-block" type="submit" onClick="cancelar();">Cancelar</a>
+						</div>				
+				</div>
+			
+			<!-- COMPRAS -->
+			<!-- Ingresar nueva compra -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="ingresarCompra" hidden=''>
+				<div class="form-group">
+					<label for="descripcionNuevaCompra">Descripción:</label>
+					<textarea class="form-control" rows="2" id="descripcionNuevaCompra"></textarea>
+				</div>
+				<br>	
+				<label for="fechaRealCompra">Fecha real de la compra</label>				
+				<div class="form-group">
+					<form>
+						<input class="form-control" type="date" name="fechaReal" id="fechaRealCompra" min="2000-01-01" max="2040-12-31"><br>
+					</form>
+				</div>
+				<br>	
+				<label for="fechaRegCompra">Fecha de registro de la compra</label>				
+				<div class="form-group">
+					<form>
+						<input class="form-control" type="date" name="fechaRegCompra" id="fechaRegCompra" min="2000-01-01" max="2040-12-31"><br>
+					</form>
+				</div>				
+				<hr>
+				<label for="selectProv">Seleccione el proveedor</label>
+				<br>
+				<!-- Campo que carga los proveedores existentes y los despliega -->
+				<select>
+					<option value="rol1">----------------------------------</option>
+					<option value="rol2">Proveedor número 1</option>
+					<option value="roln">Proveedor número N</option>
+				</select>
+				<hr>
+				<label for="selectProd">Seleccione el producto</label>
+				<br>
+				<!-- Campo que carga los proveedores existentes y los despliega -->
+				<select>
+					<option value="prod1">----------------------------------</option>
+				</select>				
+				<hr>
+				<div class="col-xs-8 col-sm-8 col-md-7 col-lg-5">	
+				<label for="cantProductos">Cantidad:</label>
+					<input type="number" class="form-control" id="cantidad" min="1">
+					<br>
+				</div>	
+				<div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
+				<br>				
+					<a class="btn btn-md btn-info btn-block" ng-click="" type="submit">Agregar</a>
+					<br>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<hr>				
+					<div class="table-responsive">          
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Cantidad</th>
+									<th>Descripción</th>
+									<th>Precio Unitario</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2</td>
+									<td>Shampoo Head & Shoulders</td>
+									<td>3000</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Coca Cola 600 ml</td>
+									<td>700</td>
+								</tr>			  
+							</tbody>
+						</table>
+						<br> <hr> <br>
+					</div>
+				</div>		  				
+				<!-- Botones para guardar o descartar los cambios -->
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit" href="login.html">Guardar</a>
+				</div>
+				<hr>	
+			</div>
+			<!-- Modificar Compra -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="modificarCompra" hidden=''>
+				<label for="selectCompra">Seleccione la compra a modificar:</label>
+				<br>
+				<select>
+					<option value="compra1">----------------------------------</option>
+				</select>
+				<hr>
+				<div class="form-group">
+					<label for="descripcionNuevaCompra">Descripción:</label>
+					<textarea class="form-control" rows="2" id="descripcionCompraModif"></textarea>
+				</div>
+				<br>	
+				<label for="fechaRealCompra">Fecha real de la compra</label>				
+				<div class="form-group">
+					<form>
+						<input class="form-control" type="date" name="fechaReal" id="fechaRealCompraModif" min="2000-01-01" max="2040-12-31"><br>
+					</form>
+				</div>				
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" type="submit" onClick="register();" href="login.html">Guardar</a>
+				</div>					
+			</div>
+			<!-- Eliminar compra -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="eliminarCompra" hidden=''>
+				<label for="selectCompra">Seleccione la compra a eliminar:</label>
+					<br>
+					<select>
+						<option value="rol1">----------------------------------</option>
+						<option value="rol2">Compra número 1</option>
+						<option value="roln">Compra número N</option>
+					</select>
+					<hr>
+					<form action="">
+						<input type="checkbox" name="confirm" value="confirmar">Confirmar eliminación<br>
+					</form>
+					<hr>
+					<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+						<a class="btn btn-md btn-danger btn-block">Eliminar</a>
+					</div>
+					<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+						<a class="btn btn-md btn-success btn-block" type="submit" onClick="cancelar();">Cancelar</a>
+					</div>				
+			</div>			
+		</div>
+		<hr>
+		<!-- Fila para asignar horas trabajadas y mostrar el formulario -->
+		<div class="row">
+			<br>
+			<button type="button" class="btn btn-success btn-md" id="btnHoras" ng-click="obtenerTrabajadoresSucursal()" onclick="mostrarHoras();">Asignar horas trabajadas</button>
+			<hr>
+			<!-- Asignar horas a un trabajador -->
+			<div class="col-xs-10 col-sm-6 col-md-4 col-lg-4" id="asignarHoras" hidden="hidden">
+				<label for="select">Seleccione el trabajador:</label>
+				<br>
+                <select ng-model="horasTrab.id" ng-options="id as id for id in trabajadoresSucursalId"></select>
+
+				<hr>
+				<label for="telNuevaSucursal">Horas ordinarias</label>
+				<input type="number" ng-model="horasTrab.horasReg" class="form-control" id="telNuevaSucursal">
+				<br>
+				<label for="telNuevaSucursal">Horas extra</label>
+				<input type="number" ng-model="horasTrab.horasExtra" class="form-control" id="telNuevaSucursal">
+				<br>
+				<label for="direccionNuevoTrabajador">Fecha de inicio de semana</label>				
+				<div class="form-group">
+					<form>
+						<input class="form-control" ng-model="horasTrab.fecha" type="date" name="fechanac" id="fechanac" min="1990-01-01" max="2018-12-31"><br>
+					</form>
+				</div>					
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
+					<a class="btn btn-md btn-success btn-block" ng-click="guardarHoras()" type="submit">Guardar</a>
+				</div>
+			</div>	
+		</div>
+		<hr>
+		<!-- Fila para generación de planilla -->
+		<div class="row">	
+			<button type="button" class="btn btn-success btn-md" id="btnPlanilla" onclick="mostrarFormPlanilla()">Generación de planilla</button>
+			<hr>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="generarPlanilla" hidden="hidden">
+				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+					<label for="direccionNuevoTrabajador">Fecha de generación</label>				
+					<div class="form-group">
+						<form>
+							<input class="form-control" ng-model="" type="date" name="fechaGen" id="fechaGen" min="1900-01-01" max="2056-12-31"><br>
+						</form>
+					</div>
+				</div>	
+				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+					<br>
+					<a class="btn btn-md btn-info btn-block" onclick="mostrarTabla();" ng-click="" type="submit">Generar</a>
+					<br>
+				</div>
+				<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9" id="tablaPlanilla" hidden="hidden">
+					<hr>
+					<div class="table-responsive">          
+						<table class="table">
+						<thead>
+							<tr>
+								<th>ID trabajador</th>
+								<th>Nombre trabajador</th>
+								<th>Horas ordinarias</th>
+								<th>Horas extra</th>
+								<th>Salario</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>123456789</td>
+								<td>Diego Armando Maradona</td>
+								<td>20</td>
+								<td>10</td>
+								<td>1000</td>
+							</tr>
+							<tr>
+								<td>987654321</td>
+								<td>Lionel Messi</td>
+								<td>40</td>
+								<td>21</td>
+								<td>1293</td>
+							</tr>			  
+						</tbody>
+						</table>
+						<br> <hr> <br>
+					</div>						
+				</div>
+				<div class="col-xs-6 col-sm-8 col-md-10 col-lg-10">	
+				</div>			
+				<div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">	
+					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
+				</div>
+			</div>
+		</div>		
+		<hr>
+
 
 
     <!-- CONTAINER DE PIE DE PÁGINA -->
