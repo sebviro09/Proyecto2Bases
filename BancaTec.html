@@ -141,63 +141,46 @@
 				<div class="form-group">
                     <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
 						<div class="radio">
-							<label><input type="radio" value="rol" name="opcRadio" id="optRoles" onclick="cancelar()" checked>Cliente Físico</label>
+							<label><input type="radio" value="clienteFisico" name="clienteRadio" id="optFisico" onclick="">Cliente Físico</label>
 						</div>
 					</div>
 					<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
 						<div class="radio">
-							<label><input type="radio" value="trabajador" name="opcRadio" id="optClientes" onclick="cancelar()">Cliente jurídico</label>
+							<label><input type="radio" value="clienteJuridico" name="clienteRadio" id="optJuridico" onclick="">Cliente jurídico</label>
 						</div>
-					</div>				
-					<label for="nombreNuevoTrab" >Nombre</label>
-					<input type="text" ng-model="trabajador.nombre" class="form-control" id="nombreNuevoTrab">
+					</div>
+					<br><hr><br>
+					<!--Cliente físico-->				
+					<label for="nombreNuevoClienteFis" >Nombre</label>
+					<input type="text" class="form-control" id="nombreNuevoClienteFis">
 					<br>
-					<label for="1ApNuevoTrab" >Primer Apellido</label>
-					<input type="text" ng-model= "trabajador.apellido1" class="form-control" id="1ApNuevoTrab">
+					<label for="1ApNuevoCliente" >Primer Apellido</label>
+					<input type="text" class="form-control" id="1ApNuevoCliente">
 					<br>
-					<label for="2ApNuevoTrab">Segundo Apellido</label>
-					<input type="text"  ng-model= "trabajador.apellido2" class="form-control" id="2ApNuevoTrab">
-				<br>
+					<label for="2ApNuevoCliente">Segundo Apellido</label>
+					<input type="text" class="form-control" id="2ApNuevoCliente">
+					<br>
 				</div>				
-				<label for="CedulaNuevoTrab">Número de cédula</label>				
-					<input class="form-control" ng-model="trabajador.ced1" id="ced1" type="number" min="1" max="9" maxlength="1" placeholder="#">
-					<input class="form-control" ng-model="trabajador.ced2" id="ced2" type="number" min="0001" max="9999" maxlength="4" placeholder="####">
-					<input class="form-control" ng-model="trabajador.ced3" id="ced3" type="number" min="0001" max="9999" maxlength="4" placeholder="####">	
+				<label for="cedFisNuevoCliente">Número de cédula</label>				
+				<input class="form-control" id="fisicoCed1" type="number" min="1" max="9" maxlength="1" placeholder="#">
+				<input class="form-control" id="fisicoCed2" type="number" min="0001" max="9999" maxlength="4" placeholder="####">
+				<input class="form-control" id="fisicoCed3" type="number" min="0001" max="9999" maxlength="4" placeholder="####">	
 				<br>
-				<label for="fechaNacNuevoTrab">Sexo</label>		
-					<div class="radio">
-						<label><input type="radio" ng-model="trabajador.sexo" name="sexo" id="hombre" value="Masculino" checked>Masculino</label>
-					</div>
-					<div class="radio">
-						<label><input type="radio" ng-model="trabajador.sexo" name="sexo" id="mujer" value="Femenino">Femenino</label>
-					</div>
-				<br>
-				<div class="form-group">
-					<label for="fechaNacNuevoTrab">Fecha de nacimiento</label>				
-					<div class="form-group">
-						<form>
-							<input class="form-control" ng-model="trabajador.fechaNac" type="date" name="fechaNacNuevoTrab" id="fechaNacNuevoTrab" min="1900-01-01" max="2016-12-31"><br>
-						</form>
-					</div>
-					<label for="fechaIngNuevoTrab">Fecha de ingreso</label>				
-					<div class="form-group">
-						<form>
-							<input class="form-control" ng-model="trabajador.fechaIng" type="date" name="fechaIngNuevoTrab" id="fechaIngNuevoTrab" min="1900-01-01" max="2017-12-31"><br>
-						</form>
-					</div>						
-				<label for="selectSucursal">Seleccione la sucursal:</label>
-					<br>
-                    <select ng-model="sucursalModif.id" ng-options="suc as suc for suc in listSucursalId" ng-click="fieldSucursalFields()"></select>
-					<hr>
-                <label for="selectRol">Seleccione el rol:</label>
-                    <br>
-                    <select ng-model="rolModif.id" ng-options="rol as rol for rol in roles" ng-click="fillFields()"></select>
-                    <hr>
-					<label for="salarioNuevoTrab" >Salario por hora</label>
-					<input type="number" class="form-control" ng-model="trabajador.salario" id="salarioNuevoTrab">
-					<br>				
+				<label for="sexoNuevoCliente">Sexo</label>		
+				<div class="radio">
+					<label><input type="radio" name="sexo" id="hombre" value="Masculino" checked>Masculino</label>
 				</div>
-				<hr>
+				<div class="radio">
+					<label><input type="radio" name="sexo" id="mujer" value="Femenino">Femenino</label>
+				</div>
+				<br>	
+				<label for="ingresoMensual">Ingreso mensual</label>	
+				<input type="number" class="form-control" id="ingresoMensual">
+				<br> <hr>
+				<!--Cliente jurídico-->
+									<label for="nombreNuevoClienteFis" >Nombre</label>
+					<input type="text" class="form-control" id="nombreNuevoClienteFis">
+					<br>
 				<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">	
 					<a class="btn btn-md btn-danger btn-block" onclick="cancelar()">Regresar</a>
 				</div>
@@ -223,7 +206,7 @@
 					<label for="2ApTrabModif">Segundo Apellido</label>
 					<input type="text" ng-model="trabajadorModif.apellido2" class="form-control" id="2ApTrabModif">
 					<br>
-				<label for="selectProv">Seleccione el rol:</label>
+					<label for="selectProv">Seleccione el rol:</label>
 					<br>
                     <select ng-model="rolModif.id" ng-options="rol as rol for rol in roles" ng-click="fillFields()"></select>
 					<hr>
